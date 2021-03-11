@@ -36,11 +36,10 @@ namespace ListPeoplePost.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(IEnumerable<Person> people)
+        public IActionResult Add(List<Person> people)
         {
             var mgr = new PersonManager(_connectionString);
             mgr.AddPeople(people.Where(p => !String.IsNullOrEmpty(p.FirstName) && !String.IsNullOrEmpty(p.LastName)).ToList());
-
             TempData["success-message"] = "People added successfully!";
 
             return Redirect("/home/index");
